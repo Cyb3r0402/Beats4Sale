@@ -1,7 +1,0 @@
-{
-  "buildCommand": "cd beats4sale && npm install && npm run build",
-  "outputDirectory": "beats4sale/.next",
-  "installCommand": "cd beats4sale && npm install",
-  "framework": "nextjs",
-  "rootDirectory": "beats4sale"
-}
