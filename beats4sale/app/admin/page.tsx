@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback, DragEvent, ChangeEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, DragEvent } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface StoredBeat {
   id: string;
@@ -87,6 +88,13 @@ function FileDropZone({
 }
 
 export default function AdminPage() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await fetch('/api/admin/auth', { method: 'DELETE' });
+    router.push('/admin/login');
+  };
+
   // Form state
   const [title, setTitle]       = useState('');
   const [bpm, setBpm]           = useState('');
@@ -200,12 +208,20 @@ export default function AdminPage() {
             <div className="text-[#00b4ff] text-[10px] font-bold uppercase tracking-widest">Admin · Vercel Blob Storage</div>
           </div>
         </div>
-        <a
-          href="/"
-          className="px-4 py-2 rounded-full text-sm font-semibold bg-[#00b4ff]/10 border border-[#00b4ff]/20 text-[#00b4ff] hover:bg-[#00b4ff]/20 transition-all duration-200"
-        >
-          ← Back to Store
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="/"
+            className="px-4 py-2 rounded-full text-sm font-semibold bg-[#00b4ff]/10 border border-[#00b4ff]/20 text-[#00b4ff] hover:bg-[#00b4ff]/20 transition-all duration-200"
+          >
+            ← Back to Store
+          </a>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 rounded-full text-sm font-semibold bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-all duration-200"
+          >
+            🔒 Logout
+          </button>
+        </div>
       </header>
 
       <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10">
