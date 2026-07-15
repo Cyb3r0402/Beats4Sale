@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const COOKIE_NAME = 'admin_session';
 const SESSION_VALUE = 'authenticated';
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Only protect /admin routes (but NOT /admin/login or /api/admin/auth)
